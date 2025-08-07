@@ -3,49 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>תוצאת תשלום</title>
+  <title>סטטוס תשלום</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
       text-align: center;
-      padding: 100px 20px;
+      padding: 50px;
+      margin: 0;
     }
     .message {
-      font-size: 24px;
-      margin-bottom: 20px;
+      max-width: 600px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 12px;
+      color: white;
+      font-size: 1.5rem;
     }
-    .success {
-      color: green;
-    }
-    .error {
-      color: red;
-    }
-    .notify {
-      color: #0d6efd;
-    }
+    .success { background-color: #2ecc71; }
+    .error { background-color: #e74c3c; }
+    .notify { background-color: #3498db; }
+    .default { background-color: #95a5a6; }
   </style>
 </head>
 <body>
-  <div id="result" class="message">טוען...</div>
+  <div id="status-message" class="message default">
+    טוען סטטוס...
+  </div>
 
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const status = urlParams.get("status");
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get('status');
 
-    const result = document.getElementById("result");
+    const messageBox = document.getElementById('status-message');
 
-    if (status === "success") {
-      result.textContent = "✅ התשלום הצליח!";
-      result.classList.add("success");
-    } else if (status === "error") {
-      result.textContent = "❌ התשלום נכשל. אנא נסה שוב.";
-      result.classList.add("error");
-    } else if (status === "notify") {
-      result.textContent = "📡 התקבל אישור מהשרת (Notify)";
-      result.classList.add("notify");
-    } else {
-      result.textContent = "🟡 אין מידע להצגה.";
+    switch (status) {
+      case 'success':
+        messageBox.className = 'message success';
+        messageBox.innerText = '✅ התשלום בוצע בהצלחה!';
+        break;
+      case 'error':
+        messageBox.className = 'message error';
+        messageBox.innerText = '❌ התשלום נכשל.';
+        break;
+      case 'notify':
+        messageBox.className = 'message notify';
+        messageBox.innerText = 'ℹ️ עדכון התקבל.';
+        break;
+      default:
+        messageBox.className = 'message default';
+        messageBox.innerText = 'סטטוס לא ידוע.';
+        break;
     }
   </script>
 </body>
