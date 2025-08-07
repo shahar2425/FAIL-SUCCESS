@@ -1,11 +1,52 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>ברוך הבא</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>תוצאת תשלום</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    .message {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .success {
+      color: green;
+    }
+    .error {
+      color: red;
+    }
+    .notify {
+      color: #0d6efd;
+    }
+  </style>
 </head>
 <body>
-  <h1>זהו עמוד הבית של האתר</h1>
-  <p>העלאה מוצלחת.</p>
+  <div id="result" class="message">טוען...</div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get("status");
+
+    const result = document.getElementById("result");
+
+    if (status === "success") {
+      result.textContent = "✅ התשלום הצליח!";
+      result.classList.add("success");
+    } else if (status === "error") {
+      result.textContent = "❌ התשלום נכשל. אנא נסה שוב.";
+      result.classList.add("error");
+    } else if (status === "notify") {
+      result.textContent = "📡 התקבל אישור מהשרת (Notify)";
+      result.classList.add("notify");
+    } else {
+      result.textContent = "🟡 אין מידע להצגה.";
+    }
+  </script>
 </body>
 </html>
