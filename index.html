@@ -22,12 +22,11 @@
     .success { background-color: #2ecc71; }
     .error { background-color: #e74c3c; }
     .notify { background-color: #3498db; }
-    .default { background-color: #95a5a6; }
   </style>
 </head>
 <body>
-  <div id="status-message" class="message default">
-    טוען סטטוס...
+  <div id="status-message" class="message error">
+    ⏳ מעבד תשלום...
   </div>
 
   <script>
@@ -36,23 +35,12 @@
 
     const messageBox = document.getElementById('status-message');
 
-    switch (status) {
-      case 'success':
-        messageBox.className = 'message success';
-        messageBox.innerText = '✅ התשלום בוצע בהצלחה!';
-        break;
-      case 'error':
-        messageBox.className = 'message error';
-        messageBox.innerText = '❌ התשלום נכשל.';
-        break;
-      case 'notify':
-        messageBox.className = 'message notify';
-        messageBox.innerText = 'ℹ️ עדכון התקבל.';
-        break;
-      default:
-        messageBox.className = 'message default';
-        messageBox.innerText = 'סטטוס לא ידוע.';
-        break;
+    if (status === 'success') {
+      messageBox.className = 'message success';
+      messageBox.innerText = '✅ התשלום בוצע בהצלחה!';
+    } else {
+      messageBox.className = 'message error';
+      messageBox.innerText = '❌ התשלום נכשל.';
     }
   </script>
 </body>
