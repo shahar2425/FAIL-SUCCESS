@@ -31,16 +31,16 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const status = params.get('status');
+    const response = params.get('response'); // מחפש את הפרמטר response
 
     const messageBox = document.getElementById('status-message');
 
-    if (status === 'success') {
+    if (response === '000') {
       messageBox.className = 'message success';
-      messageBox.innerText = '✅ התשלום בוצע בהצלחה!';
+      messageBox.innerText = '✅ RESPONSE 000 - עסקה עברה בהצלחה';
     } else {
       messageBox.className = 'message error';
-      messageBox.innerText = '❌ התשלום נכשל.';
+      messageBox.innerText = '❌ עסקה נכשלה';
     }
   </script>
 </body>
